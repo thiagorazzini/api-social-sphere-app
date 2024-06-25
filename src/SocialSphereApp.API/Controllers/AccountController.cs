@@ -46,6 +46,11 @@ namespace SocialSphereApp.API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Login into system
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public IActionResult Login(LoginInputModel model)
         {
