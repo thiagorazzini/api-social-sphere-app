@@ -6,7 +6,7 @@ public abstract class BaseEntity
         CreatedAt = DateTime.Now;
         IsDeleted = false;
     }
-    public Guid Id { get; private set; }
+    public int Id { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public bool IsDeleted { get; private set; }
 
