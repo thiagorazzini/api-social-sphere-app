@@ -63,8 +63,8 @@ namespace SocialSphereApp.API.Controllers
         /// <summary>
         /// Update password
         /// </summary>
-        [HttpPut("{id}/change-password")]
-        public IActionResult ChangePassword(int id, ChangePasswordInputModel model)
+        [HttpPut("{id}/update-password")]
+        public IActionResult UpdatePassword(int id, ChangePasswordInputModel model)
         {
             var user =  _context.Users.SingleOrDefault(u => u.Id == id);
 

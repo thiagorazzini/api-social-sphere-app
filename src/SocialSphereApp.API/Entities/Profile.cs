@@ -32,4 +32,37 @@ public class Profile : BaseEntity
     public Gender Gender { get; private set; }
     public string? Pronun { get; private set; }
     public string? CustomGender { get; private set; }
+
+    public void UpdateProfile(
+            string? displayName = null,
+            string? about = null,
+            byte[]? picture = null,
+            Address? address = null,
+            string? job = null)
+    {
+        if (displayName != null)
+        {
+            DisplayName = displayName;
+        }
+
+        if (about != null)
+        {
+            About = about;
+        }
+
+        if (picture != null)
+        {
+            Picture = picture;
+        }
+
+        if (address != null)
+        {
+            Address = address;
+        }
+
+        if (job != null)
+        {
+            Job = job;
+        }
+    }
 }
