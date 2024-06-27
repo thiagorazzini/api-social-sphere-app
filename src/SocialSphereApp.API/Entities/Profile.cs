@@ -15,7 +15,7 @@ public class Profile : BaseEntity
         Job = job;
     }
 
-    public Profile(string displayName, Gender gender, string  pronun, string customGender)
+    public Profile(string displayName, Gender gender, string?  pronun, string? customGender)
     {
         DisplayName= displayName;
         Gender  = gender;

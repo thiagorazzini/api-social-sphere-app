@@ -27,4 +27,23 @@ public class User : BaseEntity
     public string? Pronun { get; private set; }
     public string? CustomGender { get; private set; }
     public Profile Profile { get; private set; }
+
+    public void UpdatePassword(string currentPassword, string newPassword)
+    {
+        if (newPassword != currentPassword)
+        {
+            Password = newPassword;
+        }
+    }
+
+    public void UpdateAccount(string fullName, string mail, DateTime dateOfBirth, string phone, Gender gender, string pronun, string customGender)
+    {
+        FullName = fullName;
+        Mail = mail;
+        DateOfBirth = dateOfBirth;
+        Phone = phone;
+        Gender = gender;
+        Pronun = pronun;
+        CustomGender = customGender;
+    }
 }

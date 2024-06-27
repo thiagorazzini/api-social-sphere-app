@@ -20,7 +20,6 @@ namespace SocialSphereApp.API.Controllers
         /// Get  account per Id
         /// </summary>
         /// <param name="accountId"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetAccountById(int id)
         {
@@ -67,10 +66,16 @@ namespace SocialSphereApp.API.Controllers
         [HttpPut("{id}/change-password")]
         public IActionResult ChangePassword(int id, ChangePasswordInputModel model)
         {
-            if (id <= 0)
+            var user =  _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user is null)
             {
-                return BadRequest("Invalid ID.");
+                return NotFound();
             }
+
+            user.UpdatePassword(
+                model.CurrentPassword,
+                model.NewPassword);
 
             return NoContent();
         }
@@ -81,6 +86,22 @@ namespace SocialSphereApp.API.Controllers
         [HttpPut("{id}/update-account")]
         public IActionResult UpdateAccount(int id, UpdateAccountInputModel model)
         {
+            var user = _context.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            user.UpdateAccount(
+                model.FullName,
+                model.Mail,
+                model.DateOfBirth,
+                model.Phone,
+                model.Gender,
+                model.Pronun,
+                model.CustomGender);
+
             return NoContent();
         }
 
