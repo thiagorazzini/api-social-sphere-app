@@ -18,7 +18,7 @@ public class ProfileController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult UpdateProfile(int id,UpdateProfileInputModel model)
+    public IActionResult UpdateProfile(Guid id,UpdateProfileInputModel model)
     {
         var profile = _context.Profiles.SingleOrDefault(u => u.Id == id);
         
@@ -44,7 +44,22 @@ public class ProfileController : ControllerBase
             address,
             model.Job);
 
+        _context.Update(profile);
+        _context.SaveChanges();
+        
         return NoContent();
     }
 
+    [HttpGet("{id}")]
+    public IActionResult GetProfileById(Guid id)
+    {
+        var profile = _context.Profiles.SingleOrDefault(u => u.Id == id);
+
+        if(profile is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(profile);
+    }
 }

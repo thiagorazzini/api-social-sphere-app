@@ -4,11 +4,10 @@ namespace SocialSphereApp.API.Models;
 
 public class UpdateProfileInputModel
 {
-    public string? DisplayName { get; private set; }
-    public string? About { get; private set; }
-    public int? ProfileId { get; private set; }
-    public byte[]? Picture { get; private set; }
-    public string? Job { get; private set; }
+    public string? DisplayName { get;  set; }
+    public string? About { get; set; }
+    public byte[]? Picture { get; set; }
+    public string? Job { get; set; }
     public AddressInputModel? Address { get; set; }
 }
 

@@ -1,9 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using SocialSphereApp.API.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<SocialSphereAppDbContext>();
+builder.Services.AddDbContext<SocialSphereAppDbContext>(
+    o => o.UseInMemoryDatabase("SocialSphereAppDb"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();

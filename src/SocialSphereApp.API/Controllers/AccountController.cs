@@ -21,7 +21,7 @@ namespace SocialSphereApp.API.Controllers
         /// </summary>
         /// <param name="accountId"></param>
         [HttpGet("{id}")]
-        public IActionResult GetAccountById(int id)
+        public IActionResult GetAccountById(Guid id)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
 
@@ -38,33 +38,30 @@ namespace SocialSphereApp.API.Controllers
         [HttpPost("create-account")]
         public IActionResult RegisterNewAccount(CreateAccountInputModel model)
         {
-            var profile = new Profile(
-                model.FullName,
-                model.Gender,
-                model.Pronun,
-                model.CustomGender);
 
             var user = new User(
-                model.FullName,
-                model.Password,
-                model.Mail,
-                model.DateOfBirth,
-                model.Phone,
-                model.Gender,
-                model.Pronun,
-                model.CustomGender,
-                profile);
+                 model.FullName,
+                 model.Password,
+                 model.Mail,
+                 model.DateOfBirth,
+                 model.Phone,
+                 model.Gender,
+                 model.Pronun,
+                 model.CustomGender);
 
             _context.Users.Add(user);
+            _context.Profiles.Add(user.Profile);
 
-            return CreatedAtAction(nameof(GetAccountById), new { id = 1 }, model);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetAccountById), new { id = user.Id }, model);
         }
 
         /// <summary>
         /// Update password
         /// </summary>
         [HttpPut("{id}/update-password")]
-        public IActionResult UpdatePassword(int id, ChangePasswordInputModel model)
+        public IActionResult UpdatePassword(Guid id, ChangePasswordInputModel model)
         {
             var user =  _context.Users.SingleOrDefault(u => u.Id == id);
 
@@ -77,6 +74,9 @@ namespace SocialSphereApp.API.Controllers
                 model.CurrentPassword,
                 model.NewPassword);
 
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
             return NoContent();
         }
 
@@ -84,7 +84,7 @@ namespace SocialSphereApp.API.Controllers
         /// Update Account information
         /// </summary>
         [HttpPut("{id}/update-account")]
-        public IActionResult UpdateAccount(int id, UpdateAccountInputModel model)
+        public IActionResult UpdateAccount(Guid id, UpdateAccountInputModel model)
         {
             var user = _context.Users.SingleOrDefault(u => u.Id == id);
 
@@ -101,6 +101,10 @@ namespace SocialSphereApp.API.Controllers
                 model.Gender,
                 model.Pronun,
                 model.CustomGender);
+
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
 
             return NoContent();
         }
